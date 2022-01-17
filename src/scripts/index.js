@@ -1,1 +1,3 @@
-console.log('Hello Pong!');
+import '../styles/main.css';
+
+alert('Hello Pong!');
