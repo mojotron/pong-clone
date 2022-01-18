@@ -1,3 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 html {
-  background-color: coral;
+  font-size: 10px;
+  box-sizing: border-box;
+  font-family: 'Bungee', monospace;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: rgb(187, 145, 114);
+  color: #222;
+}
+/* score */
+.score {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  margin: 2rem auto;
+}
+.score__player,
+.score__computer {
+  padding: 0 2rem;
+}
+.score__player {
+  border-right: 5px solid #222;
+}
+
+/* ball */
+.ball {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background: #222;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all ease-in 0.1s;
+}
+
+.paddle {
+  position: absolute;
+  height: 15rem;
+  width: 2rem;
+  background: #222;
+  transform: translateY(-50%);
+  top: 50%;
+  border-radius: 30px;
+}
+.paddle--left {
+  left: 1rem;
+}
+.paddle--right {
+  right: 1rem;
 }

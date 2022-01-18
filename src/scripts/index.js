@@ -1,3 +1,2 @@
+import '../styles/reset.css';
 import '../styles/main.css';
-
-alert('Hello Pong!');
