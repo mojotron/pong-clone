@@ -45,7 +45,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all ease-in 0.1s;
+  transition: all ease-in 0.4s;
 }
 
 .paddle {
