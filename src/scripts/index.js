@@ -3,10 +3,10 @@ import '../styles/main.css';
 
 // ball physics
 const ballElement = document.querySelector('.ball');
+const ballRect = ballElement.getBoundingClientRect();
 
-let speed = 1;
-let deltaX = 20;
-let deltaY = 20;
+let deltaX = 500;
+let deltaY = 500;
 
 const getX = () =>
   parseFloat(getComputedStyle(ballElement).getPropertyValue('left'));
@@ -15,23 +15,33 @@ const getY = () =>
   parseFloat(getComputedStyle(ballElement).getPropertyValue('top'));
 
 const setX = () =>
-  ballElement.style.setProperty('left', `${getX() + deltaX * speed}px`);
+  ballElement.style.setProperty('left', `${getX() + deltaX}px`);
 
-const setY = () =>
-  ballElement.style.setProperty('top', `${getY() + deltaY * speed}px`);
+const setY = () => ballElement.style.setProperty('top', `${getY() + deltaY}px`);
 
-console.log(getX(), getY());
-
-setInterval(() => {
-  if (getX() > window.innerWidth || getX() < 0) {
+function temp() {
+  if (getX() + ballRect.width > window.innerWidth) {
     deltaX *= -1;
-    if (speed < 5) speed += 0.1;
+    ballElement.style.left = `${window.innerWidth - ballRect.width}px`;
   }
-  if (getY() > window.innerHeight || getY() < 0) {
+  if (getX() - ballRect.width < 0) {
+    deltaX *= -1;
+    ballElement.style.left = `${0 + ballRect.width}px`;
+  }
+  if (getY() + ballRect.height > window.innerHeight) {
     deltaY *= -1;
-    if (speed < 5) speed += 0.1;
+    ballElement.style.top = `${window.innerHeight - ballRect.height}px`;
   }
-
+  if (getY() - ballRect.height < 0) {
+    deltaY *= -1;
+    ballElement.style.top = `${0 + ballRect.height}px`;
+  }
   setX();
   setY();
-}, 200);
+  requestAnimationFrame(temp);
+}
+requestAnimationFrame(temp);
+// ballElement.style.left = `${window.innerWidth - ballRect.width / 2}px`;
+// ballElement.style.left = `${0 + ballRect.width / 2}px`;
+// ballElement.style.top = `${window.innerHeight - ballRect.height / 2}px`;
+// ballElement.style.top = `${0 + ballRect.height / 2}px`;
