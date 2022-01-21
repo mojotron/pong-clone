@@ -5,8 +5,13 @@ import '../styles/main.css';
 const ballElement = document.querySelector('.ball');
 const ballRect = ballElement.getBoundingClientRect();
 
-let deltaX = 500;
-let deltaY = 500;
+// const numberBetweenRange = (min, max, float = false) => {
+//   const number = Math.random() * (max - min) + min;
+//   return float ? Math.floor(number) : number;
+// };
+
+let moveX = 300;
+let moveY = 300;
 
 const getX = () =>
   parseFloat(getComputedStyle(ballElement).getPropertyValue('left'));
@@ -14,34 +19,60 @@ const getX = () =>
 const getY = () =>
   parseFloat(getComputedStyle(ballElement).getPropertyValue('top'));
 
-const setX = () =>
-  ballElement.style.setProperty('left', `${getX() + deltaX}px`);
+const setX = () => ballElement.style.setProperty('left', `${getX() + moveX}px`);
 
-const setY = () => ballElement.style.setProperty('top', `${getY() + deltaY}px`);
+const setY = () => ballElement.style.setProperty('top', `${getY() + moveY}px`);
 
-function temp() {
+const updateBallPosition = () => {
   if (getX() + ballRect.width > window.innerWidth) {
-    deltaX *= -1;
     ballElement.style.left = `${window.innerWidth - ballRect.width}px`;
+    moveX = -Math.abs(moveX);
   }
   if (getX() - ballRect.width < 0) {
-    deltaX *= -1;
-    ballElement.style.left = `${0 + ballRect.width}px`;
+    ballElement.style.left = `${0}px`;
+    moveX = Math.abs(moveX);
   }
   if (getY() + ballRect.height > window.innerHeight) {
-    deltaY *= -1;
     ballElement.style.top = `${window.innerHeight - ballRect.height}px`;
+    moveY = -Math.abs(moveY);
   }
   if (getY() - ballRect.height < 0) {
-    deltaY *= -1;
-    ballElement.style.top = `${0 + ballRect.height}px`;
+    ballElement.style.top = `${0}px`;
+    moveY = Math.abs(moveY);
   }
   setX();
   setY();
-  requestAnimationFrame(temp);
-}
-requestAnimationFrame(temp);
-// ballElement.style.left = `${window.innerWidth - ballRect.width / 2}px`;
-// ballElement.style.left = `${0 + ballRect.width / 2}px`;
-// ballElement.style.top = `${window.innerHeight - ballRect.height / 2}px`;
-// ballElement.style.top = `${0 + ballRect.height / 2}px`;
+
+  window.requestAnimationFrame(updateBallPosition);
+};
+
+window.requestAnimationFrame(updateBallPosition);
+
+// paddle
+const paddleLeft = document.querySelector('.paddle--left');
+const paddleRight = document.querySelector('.paddle--right');
+
+const movePaddleUp = paddleElement => {
+  const paddleRect = paddleElement.getBoundingClientRect();
+  const current = parseFloat(
+    getComputedStyle(paddleElement).getPropertyValue('top')
+  );
+  if (current - paddleRect.height / 2 < 0) return;
+  paddleElement.style.setProperty('top', `${current - 30}px`);
+};
+
+const movePaddleDown = paddleElement => {
+  const paddleRect = paddleElement.getBoundingClientRect();
+  const current = parseFloat(
+    getComputedStyle(paddleElement).getPropertyValue('top')
+  );
+  if (current + paddleRect.height / 2 > window.innerHeight) return;
+  paddleElement.style.setProperty('top', `${current + 30}px`);
+};
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'w') movePaddleUp(paddleLeft);
+  if (e.key === 's') movePaddleDown(paddleLeft);
+  if (e.key === 'ArrowUp') movePaddleUp(paddleRight);
+  if (e.key === 'ArrowDown') movePaddleDown(paddleRight);
+});

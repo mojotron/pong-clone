@@ -13,7 +13,17 @@ body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background: rgb(187, 145, 114);
+  background: linear-gradient(
+      217deg,
+      rgba(248, 63, 63, 0.8),
+      rgba(250, 104, 104, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(53, 250, 53, 0.8), rgba(62, 250, 62, 0) 70.71%),
+    linear-gradient(
+      336deg,
+      rgba(124, 124, 252, 0.8),
+      rgba(72, 72, 248, 0) 70.71%
+    );
   color: #222;
 }
 /* score */
@@ -58,8 +68,8 @@ body {
   border-radius: 30px;
 }
 .paddle--left {
-  left: 1rem;
+  left: 3rem;
 }
 .paddle--right {
-  right: 1rem;
+  right: 3rem;
 }
