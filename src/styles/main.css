@@ -28,14 +28,11 @@ body {
 }
 /* score */
 .score {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 5rem;
   margin: 2rem auto;
+  opacity: 0.8;
 }
 .score__player,
 .score__computer {
@@ -51,11 +48,11 @@ body {
   width: 3rem;
   border-radius: 50%;
   background: #222;
-  position: absolute;
-  top: 50%;
   left: 50%;
+  top: 50%;
+  position: absolute;
   transform: translate(-50%, -50%);
-  transition: all ease-in 0.2s;
+  /* transition: all ease-in 0.2s; */
 }
 
 .paddle {
