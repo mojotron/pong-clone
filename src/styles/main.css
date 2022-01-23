@@ -70,3 +70,22 @@ body {
 .paddle--right {
   right: 3rem;
 }
+/* test */
+.test {
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 10rem;
+  border: 3px solid black;
+  position: absolute;
+}
+.box-a {
+  top: 25rem;
+  left: 5rem;
+}
+.box-b {
+  top: 15rem;
+  left: 10rem;
+}

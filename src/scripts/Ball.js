@@ -8,7 +8,7 @@ function Ball() {
   const temp = numberBetweenRange.bind(this, 0.5, 1);
   const polarity = () => (Math.random() >= 0.5 ? 1 : -1);
 
-  let velocity = 0.3;
+  let velocity = 0.2;
   const direction = { x: temp() * polarity(), y: temp() * polarity() };
   const ballElement = document.querySelector('.ball');
 
@@ -30,13 +30,24 @@ function Ball() {
       `${getY() + value * velocity * direction.y}px`
     );
 
-  const update = deltaTime => {
+  const update = (deltaTime, paddleAiRect, paddlePlayer) => {
     const ballRect = ballElement.getBoundingClientRect();
+    const paddlePlayerRect = paddlePlayer.getBoundingClientRect();
     setX(deltaTime);
     setY(deltaTime);
 
+    if (ballRect.right >= paddleAiRect.left) {
+      ballElement.style.left = `${paddleAiRect.left - ballRect.width}px`;
+      direction.x = -Math.abs(temp());
+      velocity += 0.01;
+    }
+    if (ballRect.left <= paddlePlayerRect.right) {
+      ballElement.style.left = `${paddlePlayerRect.right + ballRect.width}px`;
+      direction.x = Math.abs(temp());
+      velocity += 0.01;
+    }
     if (ballRect.right >= window.innerWidth) {
-      ballElement.style.left = `${window.innerWidth - ballRect.width}px`;
+      ballElement.style.left = `${0 - ballRect.width}px`;
       direction.x = -Math.abs(temp());
       velocity += 0.01;
     }
@@ -57,7 +68,7 @@ function Ball() {
     }
   };
 
-  return { update };
+  return { update, getY };
 }
 
 export default Ball();

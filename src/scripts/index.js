@@ -1,28 +1,36 @@
 import '../styles/reset.css';
 import '../styles/main.css';
 
-import Ball from './Ball';
+// import Ball from './Ball';
+// import PaddleAI from './PaddleAI';
 
-let prevTimestamp;
-const ball = document.querySelector('.ball');
-const paddleLeft = document.querySelector('.paddle--left');
-const paddleRight = document.querySelector('.paddle--right');
+import boxesCollide from './box-collision-detection';
 
-function updateScreen(timestamp) {
-  if (prevTimestamp !== undefined) {
-    const deltaTime = timestamp - prevTimestamp;
-    // update moving elements;
-    Ball.update(deltaTime);
-    paddleRight.style.top = `${
-      parseFloat(getComputedStyle(ball).getPropertyValue('top')) * 0.9
-    }px`;
-  }
-  prevTimestamp = timestamp;
-  window.requestAnimationFrame(updateScreen);
-}
+const boxA = document.querySelector('.box-a');
+const boxB = document.querySelector('.box-b');
+const rectA = boxA.getBoundingClientRect();
+const rectB = boxB.getBoundingClientRect();
 
-window.requestAnimationFrame(updateScreen);
+const collision = boxesCollide(rectA, rectB);
+console.log(collision);
 
-document.body.addEventListener('mousemove', e => {
-  paddleLeft.style.top = `${e.y}px`;
-});
+// const paddleLeft = document.querySelector('.paddle--left');
+
+// let prevTimestamp;
+
+// function updateScreen(timestamp) {
+//   if (prevTimestamp !== undefined) {
+//     const deltaTime = timestamp - prevTimestamp;
+//     // update moving elements;
+//     Ball.update(deltaTime, PaddleAI.getRect(), paddleLeft);
+//     PaddleAI.update(deltaTime, Ball.getY());
+//   }
+//   prevTimestamp = timestamp;
+//   window.requestAnimationFrame(updateScreen);
+// }
+
+// window.requestAnimationFrame(updateScreen);
+
+// document.body.addEventListener('mousemove', e => {
+//   paddleLeft.style.top = `${e.y}px`;
+// });
