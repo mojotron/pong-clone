@@ -63,6 +63,7 @@ body {
   transform: translateY(-50%);
   top: 50%;
   border-radius: 30px;
+  /* transition: all ease-in 0.02s; */
 }
 .paddle--left {
   left: 3rem;
