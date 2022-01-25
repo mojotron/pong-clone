@@ -9,7 +9,7 @@ function Ball() {
   const temp = numberBetweenRange.bind(this, 0.5, 1);
   const polarity = () => (Math.random() >= 0.5 ? 1 : -1);
 
-  let velocity = 0.4;
+  let velocity = 0.35;
   const direction = { x: temp() * polarity(), y: temp() * polarity() };
   const ballElement = document.querySelector('.ball');
 
@@ -47,12 +47,7 @@ function Ball() {
       direction.x = Math.abs(temp());
       velocity += 0.01;
     }
-    if (ballRect.right >= window.innerWidth) {
-      alert('player win');
-    }
-    if (ballRect.left <= 0) {
-      alert('computer win');
-    }
+
     if (ballRect.bottom >= window.innerHeight) {
       ballElement.style.top = `${window.innerHeight - ballRect.height}px`;
       direction.y = -Math.abs(temp());
@@ -65,7 +60,15 @@ function Ball() {
     }
   };
 
-  return { update, getY, direction };
+  const reset = () => {
+    velocity = 0.4;
+    direction.x = temp() * polarity();
+    direction.y = temp() * polarity();
+    ballElement.style.top = '50%';
+    ballElement.style.left = '50%';
+  };
+
+  return { update, getX, getY, reset, direction };
 }
 
 export default Ball();
