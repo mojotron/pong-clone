@@ -6,11 +6,14 @@ function Ball() {
     return float ? Math.floor(number) : number;
   };
 
-  const temp = numberBetweenRange.bind(this, 0.5, 1);
+  const setDirection = numberBetweenRange.bind(this, 0.5, 1);
   const polarity = () => (Math.random() >= 0.5 ? 1 : -1);
 
-  let velocity = 0.35;
-  const direction = { x: temp() * polarity(), y: temp() * polarity() };
+  let velocity = 0.45;
+  const direction = {
+    x: setDirection() * polarity(),
+    y: setDirection() * polarity(),
+  };
   const ballElement = document.querySelector('.ball');
 
   const getX = () =>
@@ -39,31 +42,31 @@ function Ball() {
 
     if (boxesCollide(ballRect, paddleAiRect)) {
       ballElement.style.left = `${paddleAiRect.left - ballRect.width}px`;
-      direction.x = -Math.abs(temp());
+      direction.x = -Math.abs(setDirection());
       velocity += 0.01;
     }
     if (boxesCollide(ballRect, paddlePlayerRect)) {
       ballElement.style.left = `${paddlePlayerRect.right + ballRect.width}px`;
-      direction.x = Math.abs(temp());
+      direction.x = Math.abs(setDirection());
       velocity += 0.01;
     }
 
     if (ballRect.bottom >= window.innerHeight) {
       ballElement.style.top = `${window.innerHeight - ballRect.height}px`;
-      direction.y = -Math.abs(temp());
+      direction.y = -Math.abs(setDirection());
       velocity += 0.01;
     }
     if (ballRect.top <= 0) {
       ballElement.style.top = `${0 + ballRect.height}px`;
-      direction.y = Math.abs(temp());
+      direction.y = Math.abs(setDirection());
       velocity += 0.01;
     }
   };
 
   const reset = () => {
-    velocity = 0.4;
-    direction.x = temp() * polarity();
-    direction.y = temp() * polarity();
+    velocity = 0.45;
+    direction.x = setDirection() * polarity();
+    direction.y = setDirection() * polarity();
     ballElement.style.top = '50%';
     ballElement.style.left = '50%';
   };

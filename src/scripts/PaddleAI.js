@@ -1,6 +1,6 @@
 function PaddleAI() {
   const parentElement = document.querySelector('.paddle--right');
-  const speed = 0.6;
+  const speed = 0.009;
   const getY = () =>
     parseFloat(getComputedStyle(parentElement).getPropertyValue('top'));
 
@@ -8,13 +8,10 @@ function PaddleAI() {
     parentElement.style.setProperty('top', `${value}px`);
   };
 
-  const update = (deltaTime, ballY, direction) => {
-    if (direction < 0) return;
-    if (ballY > getY()) {
-      setY(getY() + speed * deltaTime);
-    } else {
-      setY(getY() - speed * deltaTime);
-    }
+  const update = (deltaTime, ballPositionY, ballDirectionX) => {
+    if (ballDirectionX < 0) return;
+    let currentY = getY();
+    setY((currentY += speed * deltaTime * (ballPositionY - getY())));
   };
 
   const getRect = () => parentElement.getBoundingClientRect();

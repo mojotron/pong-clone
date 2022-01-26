@@ -15,8 +15,8 @@ function updateScore(element) {
 }
 
 function isGameOver(ballX) {
-  if (ballX <= 0) updateScore(scorePlayer);
-  if (ballX >= window.innerWidth) updateScore(scoreComputer);
+  if (ballX <= 0) updateScore(scoreComputer);
+  if (ballX >= window.innerWidth) updateScore(scorePlayer);
 }
 
 let prevTimestamp;

@@ -1,6 +1,8 @@
+# Pong Clone
+
 ## What have I learned?
 
-### requestAnimationFrame method
+### requestAnimationFrame
 
 ### bounding box collision
 
