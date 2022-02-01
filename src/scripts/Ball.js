@@ -1,20 +1,17 @@
 import boxesCollide from './box-collision-detection';
+import { BALL_VELOCITY } from './config';
+import { numberBetweenRange, polarity } from './helpers';
 
 function Ball() {
-  const numberBetweenRange = (min, max, float = false) => {
-    const number = Math.random() * (max - min) + min;
-    return float ? Math.floor(number) : number;
-  };
+  const ballElement = document.querySelector('.ball');
 
   const setDirection = numberBetweenRange.bind(this, 0.5, 1);
-  const polarity = () => (Math.random() >= 0.5 ? 1 : -1);
-
-  let velocity = 0.45;
+  // combination setDirection + polarity is to send initial bol to random direction
+  let velocity = BALL_VELOCITY;
   const direction = {
     x: setDirection() * polarity(),
     y: setDirection() * polarity(),
   };
-  const ballElement = document.querySelector('.ball');
 
   const getX = () =>
     parseFloat(getComputedStyle(ballElement).getPropertyValue('left'));
@@ -40,6 +37,9 @@ function Ball() {
     setX(deltaTime);
     setY(deltaTime);
 
+    // after ball hits top/bottom wall or paddle we set ball to inner screen
+    // boundaries to avoid bug when ball get stack in the wall when ball dimension
+    // is greater then screen or paddle dimension
     if (boxesCollide(ballRect, paddleAiRect)) {
       ballElement.style.left = `${paddleAiRect.left - ballRect.width}px`;
       direction.x = -Math.abs(setDirection());
@@ -50,7 +50,6 @@ function Ball() {
       direction.x = Math.abs(setDirection());
       velocity += 0.01;
     }
-
     if (ballRect.bottom >= window.innerHeight) {
       ballElement.style.top = `${window.innerHeight - ballRect.height}px`;
       direction.y = -Math.abs(setDirection());
@@ -64,7 +63,7 @@ function Ball() {
   };
 
   const reset = () => {
-    velocity = 0.45;
+    velocity = BALL_VELOCITY;
     direction.x = setDirection() * polarity();
     direction.y = setDirection() * polarity();
     ballElement.style.top = '50%';

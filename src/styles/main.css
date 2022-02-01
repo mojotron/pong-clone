@@ -15,15 +15,11 @@ body {
   overflow: hidden;
   background: linear-gradient(
       217deg,
-      rgba(248, 63, 63, 0.8),
-      rgba(250, 104, 104, 0) 70.71%
+      rgba(245, 39, 39, 0.8),
+      rgba(252, 80, 80, 0) 70.71%
     ),
-    linear-gradient(127deg, rgba(53, 250, 53, 0.8), rgba(62, 250, 62, 0) 70.71%),
-    linear-gradient(
-      336deg,
-      rgba(124, 124, 252, 0.8),
-      rgba(72, 72, 248, 0) 70.71%
-    );
+    linear-gradient(127deg, rgba(14, 238, 14, 0.8), rgba(50, 168, 50, 0) 70.71%),
+    linear-gradient(336deg, rgba(56, 56, 252, 0.8), rgba(64, 64, 187, 0) 70.71%);
   color: #222;
 }
 /* score */
@@ -44,14 +40,15 @@ body {
 
 /* ball */
 .ball {
-  height: 3vmax;
-  width: 3vmax;
+  height: 3vmin;
+  width: 3vmin;
   border-radius: 50%;
-  background: #222;
+  background: rgb(17, 2, 2);
   left: 50%;
   top: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
+
   /* transition: all ease-in 0.2s; */
 }
 
@@ -59,17 +56,17 @@ body {
   position: absolute;
   height: 15vh;
   width: 1rem;
-  background: #222;
+  background: rgb(66, 62, 62);
   transform: translateY(-50%);
   top: 50%;
-  border-radius: 30px;
+  border-radius: 3px;
   /* transition: all ease-in 0.02s; */
 }
 .paddle--left {
-  left: 3rem;
+  left: 1rem;
 }
 .paddle--right {
-  right: 3rem;
+  right: 1rem;
 }
 /* test */
 .test {
