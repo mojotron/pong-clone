@@ -11,15 +11,23 @@ Instead of using setInterval function requestAnimationFrame is better approach f
 
 ### 2.changing css values with js using css variables
 
-Using getComputedStyle, getPropertyValue, setProperty to dynamically change html element position.
+Using getComputedStyle, getPropertyValue, setProperty to dynamically change DOM element position.
 
 ### 3. getting element size depending on screen size
 
 Learning to work with window.innerHeight and window.innerWidth. Interact between elements using getBoundingClientRect method.
 
-### bounding box collision
+### 4. bounding box collision detection
 
-## Useful resources:
+Basic algoritham of detecting the intersection of two objects. Two objects are intersecting when:
 
-Awesome video tutorial.
+- ObjectA.top <= ObjectB.bottom AND
+- ObjectA.bottom >= ObjectB.top AND
+- ObjectA.left <= ObjectB.right AND
+- ObjectA.right >= ObjectB.left
+
+## Useful resources
+
+Awesome video tutorial by [Kyle Cook](https://github.com/WebDevSimplified), that was motivation to this project.I have learned many new concepts.
+
 Great explanation for bounding box collision detection by in this [video](https://www.youtube.com/watch?v=SoSHVoIZYbY)
